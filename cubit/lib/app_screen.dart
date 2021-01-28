@@ -4,12 +4,14 @@ import 'app_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AppScreen extends StatelessWidget {
-  AppScreen({this.content});
-
-  final String content;
+  AppScreen();
 
   @override
   Widget build(BuildContext context) {
+    final state = context.read<AppCubit>().state;
+    String content = "";
+    if (state is LoadedAppCubitState) content = state.content;
+
     return Scaffold(
         body: Center(
       child: Column(

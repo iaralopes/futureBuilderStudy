@@ -15,7 +15,7 @@ class AppInit extends StatelessWidget {
             return SplashScreen();
           }
           if (state is LoadedAppCubitState) {
-            return AppScreen(content: state.content);
+            return AppScreen();
           }
           return Container();
         },
