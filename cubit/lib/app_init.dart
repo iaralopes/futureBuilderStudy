@@ -7,17 +7,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class AppInit extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    print('build AppInit');
     return BlocProvider(
       create: (BuildContext context) => AppCubit()..fetchData(),
-      child: BlocBuilder<AppCubit, AppCubitState>(
-        builder: (context, state) {
-          if (state is LoadingAppCubitState) {
-            return SplashScreen();
+      child: Builder(
+        builder: (context) {
+          print('build Builder');
+          final isLoading = context.select(
+              (AppCubit appCubit) => appCubit.state is LoadingAppCubitState);
+
+          if (isLoading) {
+            return const SplashScreen();
+          } else {
+            return const AppScreen();
           }
-          if (state is LoadedAppCubitState) {
-            return AppScreen();
-          }
-          return Container();
         },
       ),
     );

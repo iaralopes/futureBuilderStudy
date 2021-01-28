@@ -4,13 +4,22 @@ import 'app_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AppScreen extends StatelessWidget {
-  AppScreen();
+  const AppScreen();
 
   @override
   Widget build(BuildContext context) {
-    final state = context.read<AppCubit>().state;
-    String content = "";
-    if (state is LoadedAppCubitState) content = state.content;
+    print('build AppScreen');
+    final content = context.select((AppCubit value) {
+      final state = value.state;
+      if (state is LoadedAppCubitState) {
+        return state.content;
+      }
+      return null;
+    });
+
+//    final state = context.watch<AppCubit>().state;
+//    String content = "";
+//    if (state is LoadedAppCubitState) content = state.content;
 
     return Scaffold(
         body: Center(
