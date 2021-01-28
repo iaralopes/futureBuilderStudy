@@ -1,11 +1,18 @@
+import 'dart:math';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AppCubit extends Cubit<AppCubitState> {
   AppCubit() : super(LoadingAppCubitState());
 
-  Future<void> fetchData() => Future.delayed(Duration(seconds: 10), () {
-        emit(LoadedAppCubitState(content: 'Loaded State Hello World!'));
-      });
+  Future<void> fetchData() {
+    if(!(state is LoadingAppCubitState)) emit(LoadingAppCubitState());
+
+    return Future.delayed(Duration(seconds: 10), () {
+      emit(LoadedAppCubitState(
+          content: 'Hello World! - ${Random().nextInt(1000)}'));
+    });
+  }
 }
 
 abstract class AppCubitState {}
