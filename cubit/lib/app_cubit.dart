@@ -6,9 +6,9 @@ class AppCubit extends Cubit<AppCubitState> {
   AppCubit() : super(LoadingAppCubitState());
 
   Future<void> fetchData() {
-    if(!(state is LoadingAppCubitState)) emit(LoadingAppCubitState());
+    if (!(state is LoadingAppCubitState)) emit(LoadingAppCubitState());
 
-    return Future.delayed(Duration(seconds: 10), () {
+    return Future.delayed(Duration(seconds: 3), () {
       emit(LoadedAppCubitState(
           content: 'Hello World! - ${Random().nextInt(1000)}'));
     });
